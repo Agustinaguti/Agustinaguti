@@ -1,0 +1,24 @@
+class Musico:
+    def instrumento(self):
+        return "Instrumento genérico"
+
+class Guitarrista(Musico):
+    def instrumento(self):
+        return "Guitarra"
+
+class Baterista(Musico):
+    def instrumento(self):
+        return "Batería"
+
+# Instanciamos los objetos
+musico1 = Guitarrista()
+musico2 = Baterista()
+
+# Demostramos el polimorfismo
+def mostrar_instrumento(musico):
+    print(musico.instrumento())
+
+# Llamamos a la función con diferentes tipos de músicos
+mostrar_instrumento(musico1)  # Salida: Guitarra
+mostrar_instrumento(musico2)  # Salida: Batería
+
