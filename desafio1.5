@@ -1,0 +1,16 @@
+def dividir_numeros():
+    try:
+        # Pedir los números al usuario
+        num1 = int(input("Colocar el primer número entero: "))
+        num2 = int(input("Colocar el segundo número entero: "))
+        
+        # realizar la división
+        resultado = num1 / num2
+        print(f"El resultado de la división es: {resultado}")
+        
+    except ValueError:
+        print("Error: Debes introducir valores numéricos enteros.")
+    except ZeroDivisionError:
+        print("Error: No se puede dividir por cero.")
+
+dividir_numeros()
