@@ -1,0 +1,21 @@
+def calcular_factorial(numero):
+    # Manejo de excepciones antes de procesar
+    if not isinstance(numero, int):
+        return "Error: El valor debe ser un número entero."
+    if numero < 0:
+        return "Error: El número debe ser entero y positivo."
+    
+    try:
+        # Cálculo del factorial
+        resultado = 1
+        for i in range(1, numero + 1):
+            resultado *= i
+        return resultado
+    except Exception as e:
+        return f"Se produjo un error inesperado: {e}"
+
+# Ejemplos de uso
+print(calcular_factorial(5))      # 120
+print(calcular_factorial(-3))     # Error: número negativo
+print(calcular_factorial(3.5))    # Error: no es entero
+print(calcular_factorial(1000))   # Muy grande para calcular manualmente
