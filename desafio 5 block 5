@@ -1,0 +1,25 @@
+def leer_archivo(ruta_archivo):
+    archivo = None  # Inicializamos la variable archivo
+
+    try:
+        # Intentar abrir el archivo en modo lectura
+        archivo = open(ruta_archivo, 'r')
+        contenido = archivo.readlines()  # Lee todas las líneas del archivo
+        print("Contenido del archivo:")
+        for linea in contenido:
+            print(linea.strip())  # Imprimir cada línea sin espacios en blanco
+    except FileNotFoundError:
+        print(f"Error: El archivo '{ruta_archivo}' no existe.")
+    except IOError:
+        print(f"Error: No se pudo leer el archivo '{ruta_archivo}'.")
+    except Exception as e:
+        print(f"Se produjo un error inesperado: {e}")
+    finally:
+        # Cerrar el archivo si fue abierto
+        if archivo is not None:
+            archivo.close()
+            print("El archivo se ha cerrado correctamente.")
+
+# Ejemplo de uso
+ruta = 'ejemplo.txt'  # Cambia este valor por la ruta del archivo que desees leer
+leer_archivo(ruta)
