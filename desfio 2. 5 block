@@ -1,0 +1,43 @@
+def realizar_operaciones(valores):
+    resultados = []
+    
+    for valor in valores:
+        try:
+            # Convertimos el valor a un número
+            numero = float(valor)
+            
+            # Realizamos algunas operaciones
+            suma = numero + 10
+            resta = numero - 5
+            multiplicacion = numero * 2
+            division = numero / 2  # Aquí podría ocurrir ZeroDivisionError
+            
+            # Agregamos los resultados a la lista
+            resultados.append({
+                'valor': numero,
+                'suma': suma,
+                'resta': resta,
+                'multiplicacion': multiplicacion,
+                'division': division
+            })
+        
+        except ZeroDivisionError:
+            print(f"No se puede dividir {valor} por cero.")
+        except TypeError:
+            print(f"Tipo de dato no válido para el valor: {valor}.")
+        except ValueError:
+            print(f"Valor no convertible a número: {valor}.")
+        except Exception as e:
+            print(f"Se produjo un error inesperado: {e}")
+
+    return resultados
+
+# Lista de valores de ejemplo
+valores = [10, 0, 'a', None, 15]
+
+# Llamada a la función
+resultados = realizar_operaciones(valores)
+
+# Mostrar resultados
+for resultado in resultados:
+    print(resultado)
