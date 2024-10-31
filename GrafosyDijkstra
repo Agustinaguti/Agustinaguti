@@ -1,0 +1,34 @@
+class Grafo:
+    def __init__(self):
+        self.nodos = []  # Lista de nodos
+        self.matriz = []  # Matriz de adyacencia
+
+    def agregar_nodo(self, nodo):
+        if nodo not in self.nodos:
+            self.nodos.append(nodo)
+            # Expandir la matriz de adyacencia
+            for fila in self.matriz:
+                fila.append(0)
+            self.matriz.append([0] * len(self.nodos))
+
+    def agregar_arista(self, origen, destino):
+        if origen in self.nodos and destino in self.nodos:
+            origen_idx = self.nodos.index(origen)
+            destino_idx = self.nodos.index(destino)
+            self.matriz[origen_idx][destino_idx] = 1  # Crear la arista
+
+    def mostrar_matriz(self):
+        print("Matriz de adyacencia:")
+        for i, nodo in enumerate(self.nodos):
+            print(f"{nodo}: {self.matriz[i]}")
+
+# Ejemplo de uso
+grafo = Grafo()
+grafo.agregar_nodo("X")
+grafo.agregar_nodo("Y")
+grafo.agregar_nodo("Z")
+
+grafo.agregar_arista("X", "Y")
+grafo.agregar_arista("Y", "Z")
+
+grafo.mostrar_matriz()
