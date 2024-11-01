@@ -1,0 +1,82 @@
+class Nodo:
+    def __init__(self, valor):
+        self.valor = valor
+        self.izquierdo = None
+        self.derecho = None
+
+def construir_arbol(expresion):
+    def precedencia(op):
+        if op == '+' or op == '-':
+            return 1
+        if op == '*' or op == '/':
+            return 2
+        return 0
+
+    def crear_nodo(op):
+        return Nodo(op)
+
+    def procesar_operadores(operadores, operandos):
+        operador = operadores.pop()
+        derecha = operandos.pop()
+        izquierda = operandos.pop()
+        nodo = crear_nodo(operador)
+        nodo.izquierdo = izquierda
+        nodo.derecho = derecha
+        operandos.append(nodo)
+
+    operadores = []
+    operandos = []
+    i = 0
+    tokens = []
+
+    while i < len(expresion):
+        if expresion[i] == ' ':
+            i += 1
+            continue
+        if expresion[i].isdigit():
+            num = ''
+            while i < len(expresion) and expresion[i].isdigit():
+                num += expresion[i]
+                i += 1
+            tokens.append(int(num))
+        else:
+            tokens.append(expresion[i])
+            i += 1
+
+    for token in tokens:
+        if isinstance(token, int):
+            operandos.append(Nodo(token))
+        else:
+            while (operadores and precedencia(operadores[-1]) >= precedencia(token)):
+                procesar_operadores(operadores, operandos)
+            operadores.append(token)
+
+    while operadores:
+        procesar_operadores(operadores, operandos)
+
+    return operandos[0]
+
+def evaluar_arbol(nodo):
+    if nodo is None:
+        return 0
+    if nodo.izquierdo is None and nodo.derecho is None:
+        return nodo.valor
+    
+    izquierda = evaluar_arbol(nodo.izquierdo)
+    derecha = evaluar_arbol(nodo.derecho)
+
+    if nodo.valor == '+':
+        return izquierda + derecha
+    elif nodo.valor == '-':
+        return izquierda - derecha
+    elif nodo.valor == '*':
+        return izquierda * derecha
+    elif nodo.valor == '/':
+        return izquierda / derecha
+
+# Prueba el programa
+if __name__ == "__main__":
+    expresion = "5 + 3 * 4"
+    arbol = construir_arbol(expresion)
+    resultado = evaluar_arbol(arbol)
+    print(f"El resultado de la expresión '{expresion}' es: {resultado}")
