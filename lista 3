@@ -1,0 +1,11 @@
+def eliminar_duplicados(lista):
+    # Crear un conjunto para eliminar duplicados
+    lista_sin_duplicados = list(set(lista))
+    return lista_sin_duplicados
+
+# Ejemplo de uso
+lista_original = [10, 20, 20, 30, 40, 10, 50, 60, 60]
+lista_sin_duplicados = eliminar_duplicados(lista_original)
+
+print("Lista original:", lista_original)
+print("Lista sin duplicados:", lista_sin_duplicados)
