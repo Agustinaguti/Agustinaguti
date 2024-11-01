@@ -1,0 +1,21 @@
+def encontrar_mayor():
+    # Solicitar tres números al usuario
+    print("Introduce tres números enteros:")
+    num1 = int(input("Número 1: "))
+    num2 = int(input("Número 2: "))
+    num3 = int(input("Número 3: "))
+
+    # Comparar los números
+    if num1 == num2 == num3:
+        print("Todos los números son iguales.")
+    else:
+        mayor = num1  # Suponemos que num1 es el mayor
+        if num2 > mayor:
+            mayor = num2
+        if num3 > mayor:
+            mayor = num3
+        print(f"El número mayor es: {mayor}")
+
+# Ejecutar el programa
+if __name__ == "__main__":
+    encontrar_mayor()
