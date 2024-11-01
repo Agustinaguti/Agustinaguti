@@ -1,0 +1,57 @@
+class Nodo:
+    def __init__(self, valor):
+        self.valor = valor
+        self.izquierdo = None
+        self.derecho = None
+
+class ArbolBusquedaBinaria:
+    def __init__(self):
+        self.raiz = None
+
+    def insertar(self, valor):
+        if self.raiz is None:
+            self.raiz = Nodo(valor)
+        else:
+            self._insertar_recursivo(self.raiz, valor)
+
+    def _insertar_recursivo(self, nodo, valor):
+        if valor < nodo.valor:
+            if nodo.izquierdo is None:
+                nodo.izquierdo = Nodo(valor)
+            else:
+                self._insertar_recursivo(nodo.izquierdo, valor)
+        else:
+            if nodo.derecho is None:
+                nodo.derecho = Nodo(valor)
+            else:
+                self._insertar_recursivo(nodo.derecho, valor)
+
+    def buscar(self, valor):
+        return self._buscar_recursivo(self.raiz, valor)
+
+    def _buscar_recursivo(self, nodo, valor):
+        if nodo is None:
+            return False
+        if valor == nodo.valor:
+            return True
+        elif valor < nodo.valor:
+            return self._buscar_recursivo(nodo.izquierdo, valor)
+        else:
+            return self._buscar_recursivo(nodo.derecho, valor)
+
+# Ejemplo de uso
+if __name__ == "__main__":
+    # Crear un árbol de búsqueda binaria
+    abb = ArbolBusquedaBinaria()
+
+    # Conjunto de números enteros únicos
+    numeros = [7, 3, 9, 1, 5, 8, 10]
+
+    # Insertar números en el ABB
+    for numero in numeros:
+        abb.insertar(numero)
+
+    # Buscar un número
+    numero_a_buscar = 5
+    existe = abb.buscar(numero_a_buscar)
+    print(f"El número {numero_a_buscar} {'existe' if existe else 'no existe'} en el árbol.")
