@@ -1,0 +1,28 @@
+def buscar_codigo(codigos):
+    # Solicitar al usuario que introduzca un código de producto
+    codigo_a_buscar = input("Introduce el código del producto a buscar: ")
+
+    # Inicializar una variable para la posición
+    posicion = -1
+
+    # Buscar el código en la lista
+    for i, codigo in enumerate(codigos):
+        if codigo == codigo_a_buscar:
+            posicion = i
+            break
+
+    # Verificar si se encontró el código
+    if posicion != -1:
+        print(f"El código {codigo_a_buscar} se encuentra en la posición {posicion}.")
+    else:
+        print(f"El código {codigo_a_buscar} no se ha encontrado en la lista.")
+
+# Lista de códigos de productos
+codigos_productos = [
+    "P101", "P102", "P103", "P104", "P105",
+    "P106", "P107", "P108", "P109", "P110"
+]
+
+# Ejecutar el programa
+if __name__ == "__main__":
+    buscar_codigo(codigos_productos)
