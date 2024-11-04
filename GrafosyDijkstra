@@ -22,13 +22,13 @@ class Grafo:
         for i, nodo in enumerate(self.nodos):
             print(f"{nodo}: {self.matriz[i]}")
 
-# Ejemplo de uso
+# Ejemplo para poder hacer uso
 grafo = Grafo()
-grafo.agregar_nodo("X")
-grafo.agregar_nodo("Y")
-grafo.agregar_nodo("Z")
+grafo.agregar_nodo("A")
+grafo.agregar_nodo("B")
+grafo.agregar_nodo("C")
 
-grafo.agregar_arista("X", "Y")
-grafo.agregar_arista("Y", "Z")
+grafo.agregar_arista("A", "B")
+grafo.agregar_arista("B", "C")
 
 grafo.mostrar_matriz()
