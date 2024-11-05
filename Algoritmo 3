@@ -1,0 +1,39 @@
+def busqueda_binaria(lista, estudiante_buscado):
+    # Definimos el rango de búsqueda
+    bajo = 0
+    alto = len(lista) - 1
+    
+    while bajo <= alto:
+        # Encuentra el punto medio de la lista
+        medio = (bajo + alto) // 2
+        
+        # Comparamos el estudiante en el medio con el que estamos buscando
+        if lista[medio] == estudiante_buscado:
+            return f"Estudiante {estudiante_buscado} encontrado en la posición {medio}."
+        
+        # Si el estudiante buscado es menor que el del medio, buscar en la mitad inferior
+        elif lista[medio] > estudiante_buscado:
+            alto = medio - 1
+        
+        # Si el estudiante buscado es mayor que el del medio, buscar en la mitad superior
+        else:
+            bajo = medio + 1
+    
+    # Si no encontramos el estudiante
+    return f"Estudiante {estudiante_buscado} no encontrado en la lista."
+
+# Ejemplo de uso
+estudiantes = [
+    "Ana", "Carlos", "Felipe", "José", "Luis", "Marta", 
+    "Pablo", "Raquel", "Sandra", "Tomás", "Victoria"
+]
+
+# Buscando un estudiante específico
+estudiante_buscado = "Marta"
+resultado = busqueda_binaria(estudiantes, estudiante_buscado)
+print(resultado)
+
+# Buscando un estudiante que no está en la lista
+estudiante_buscado = "Javier"
+resultado = busqueda_binaria(estudiantes, estudiante_buscado)
+print(resultado)
