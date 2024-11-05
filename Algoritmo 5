@@ -1,0 +1,102 @@
+# Definición de la clase Nodo para representar cada nodo del árbol
+class Nodo:
+    def __init__(self, estudiante, promedio):
+        self.estudiante = estudiante  # Nombre del estudiante
+        self.promedio = promedio  # Promedio del estudiante
+        self.izquierda = None  # Subárbol izquierdo
+        self.derecha = None  # Subárbol derecho
+
+# Definición de la clase del Árbol Binario de Búsqueda (BST)
+class ArbolBinarioBusqueda:
+    def __init__(self):
+        self.raiz = None  # La raíz del árbol
+
+    def insertar(self, estudiante, promedio):
+        # Función para insertar un nuevo nodo en el árbol
+        if self.raiz is None:
+            self.raiz = Nodo(estudiante, promedio)
+        else:
+            self._insertar_recursivo(self.raiz, estudiante, promedio)
+
+    def _insertar_recursivo(self, nodo, estudiante, promedio):
+        # Inserta el nodo recursivamente según el promedio
+        if promedio < nodo.promedio:
+            # Si el promedio es menor, se va al subárbol izquierdo
+            if nodo.izquierda is None:
+                nodo.izquierda = Nodo(estudiante, promedio)
+            else:
+                self._insertar_recursivo(nodo.izquierda, estudiante, promedio)
+        else:
+            # Si el promedio es mayor o igual, se va al subárbol derecho
+            if nodo.derecha is None:
+                nodo.derecha = Nodo(estudiante, promedio)
+            else:
+                self._insertar_recursivo(nodo.derecha, estudiante, promedio)
+
+    def recorrido_inorden(self):
+        # Función para realizar el recorrido inorden y devolver la lista de estudiantes ordenados
+        estudiantes_ordenados = []
+        self._recorrido_inorden_recursivo(self.raiz, estudiantes_ordenados)
+        return estudiantes_ordenados
+
+    def _recorrido_inorden_recursivo(self, nodo, estudiantes_ordenados):
+        # Realiza el recorrido inorden recursivo
+        if nodo:
+            self._recorrido_inorden_recursivo(nodo.izquierda, estudiantes_ordenados)
+            estudiantes_ordenados.append((nodo.estudiante, nodo.promedio))
+            self._recorrido_inorden_recursivo(nodo.derecha, estudiantes_ordenados)
+
+# Ejemplo 1: Estudiantes con promedios
+def ejemplo_1():
+    estudiantes = [
+        ("Juan", 78.4),
+        ("Clara", 88.5),
+        ("Javier", 92.0),
+        ("Teresa", 85.6),
+        ("Raúl", 80.3)
+    ]
+    
+    # Crear un árbol binario de búsqueda
+    arbol = ArbolBinarioBusqueda()
+    
+    # Insertar estudiantes en el árbol
+    for estudiante, promedio in estudiantes:
+        arbol.insertar(estudiante, promedio)
+    
+    # Realizar el recorrido inorden
+    estudiantes_ordenados = arbol.recorrido_inorden()
+    
+    # Mostrar los estudiantes en orden ascendente según su promedio
+    print("Ejemplo 1 - Estudiantes ordenados por rendimiento académico (de menor a mayor):")
+    for estudiante, promedio in estudiantes_ordenados:
+        print(f"{estudiante}: {promedio}")
+
+# Ejemplo 2: Otro conjunto de estudiantes
+def ejemplo_2():
+    estudiantes = [
+        ("Ana", 95.3),
+        ("Luis", 84.2),
+        ("Marta", 90.1),
+        ("Felipe", 72.4),
+        ("Sandra", 80.5)
+    ]
+    
+    # Crear un árbol binario de búsqueda
+    arbol = ArbolBinarioBusqueda()
+    
+    # Insertar estudiantes en el árbol
+    for estudiante, promedio in estudiantes:
+        arbol.insertar(estudiante, promedio)
+    
+    # Realizar el recorrido inorden
+    estudiantes_ordenados = arbol.recorrido_inorden()
+    
+    # Mostrar los estudiantes en orden ascendente según su promedio
+    print("\nEjemplo 2 - Estudiantes ordenados por rendimiento académico (de menor a mayor):")
+    for estudiante, promedio in estudiantes_ordenados:
+        print(f"{estudiante}: {promedio}")
+
+# Ejecutar los ejemplos
+if __name__ == "__main__":
+    ejemplo_1()
+    ejemplo_2()
