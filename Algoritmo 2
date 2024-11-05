@@ -1,0 +1,24 @@
+def buscar_calificacion(tabla_calificaciones, calificacion_buscada):
+    # Recorremos cada fila (estudiante)
+    for i, fila in enumerate(tabla_calificaciones):
+        # Recorremos cada columna (materia) en la fila
+        for j, calificacion in enumerate(fila):
+            if calificacion == calificacion_buscada:
+                # Si encontramos la calificación, retornamos el estudiante y la materia
+                return f"Calificación {calificacion_buscada} encontrada en el Estudiante {i+1}, Materia {j+1}"
+    
+    # Si no se encuentra la calificación
+    return f"Calificación {calificacion_buscada} no encontrada en la tabla."
+
+# Ejemplo de uso
+tabla_calificaciones = [
+    [75, 88, 90, 85, 92],  # Estudiante 1
+    [80, 79, 82, 90, 85],  # Estudiante 2
+    [91, 94, 87, 93, 88],  # Estudiante 3
+    [85, 78, 92, 91, 80]   # Estudiante 4
+]
+
+# Buscando una calificación específica
+calificacion_buscada = 92
+resultado = buscar_calificacion(tabla_calificaciones, calificacion_buscada)
+print(resultado)
