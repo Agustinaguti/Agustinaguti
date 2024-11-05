@@ -1,0 +1,30 @@
+# Función para ordenar estudiantes por su promedio usando el algoritmo de selección
+def ordenamiento_por_seleccion(estudiantes, promedios):
+    n = len(estudiantes)
+    
+    # Recorremos la lista de estudiantes
+    for i in range(n):
+        # Suponemos que el estudiante en la posición i tiene el promedio más alto
+        max_idx = i
+        
+        # Buscamos el estudiante con el promedio más alto en el resto de la lista
+        for j in range(i + 1, n):
+            if promedios[j] > promedios[max_idx]:
+                max_idx = j
+        
+        # Intercambiamos el estudiante actual con el que tiene el promedio más alto
+        if max_idx != i:
+            estudiantes[i], estudiantes[max_idx] = estudiantes[max_idx], estudiantes[i]
+            promedios[i], promedios[max_idx] = promedios[max_idx], promedios[i]
+    
+    # Imprimir la lista ordenada
+    print("Estudiantes ordenados por promedio (de mayor a menor):")
+    for i in range(n):
+        print(f"{estudiantes[i]}: {promedios[i]}")
+
+# Ejemplo de uso
+estudiantes = ["Ana", "Carlos", "Felipe", "José", "Luis"]
+promedios = [85.4, 92.3, 76.5, 88.9, 90.1]
+
+# Llamamos a la función para ordenar los estudiantes por su promedio
+ordenamiento_por_seleccion(estudiantes, promedios)
