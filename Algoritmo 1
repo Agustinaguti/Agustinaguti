@@ -1,0 +1,65 @@
+from collections import deque
+
+# Definición de la clase Nodo
+class Nodo:
+    def __init__(self, grado, estudiantes):
+        self.grado = grado  # Grado (ej. grado 12)
+        self.estudiantes = estudiantes  # Lista de estudiantes en este grado
+        self.hijos = []  # Lista de hijos (grados inferiores)
+
+    def agregar_hijo(self, nodo_hijo):
+        self.hijos.append(nodo_hijo)
+
+# Función para realizar el recorrido por niveles (BFS)
+def recorrido_por_niveles(raiz):
+    # Usamos una cola para hacer el recorrido por niveles
+    cola = deque([raiz])
+
+    while cola:
+        # Sacamos el primer nodo de la cola
+        nodo_actual = cola.popleft()
+
+        # Mostramos los estudiantes del nodo actual (grado)
+        print(f"Grado {nodo_actual.grado}: {', '.join(nodo_actual.estudiantes)}")
+
+        # Agregamos los hijos del nodo actual a la cola (siguientes grados)
+        for hijo in nodo_actual.hijos:
+            cola.append(hijo)
+
+# Primer ejemplo
+print("Ejemplo 1:")
+# Creando los nodos para cada grado
+grado_12 = Nodo(12, ["A", "B", "C"])
+grado_11 = Nodo(11, ["D", "E"])
+grado_10 = Nodo(10, ["F"])
+grado_9 = Nodo(9, ["G", "H"])
+grado_8 = Nodo(8, ["I"])
+
+# Agregando los hijos a cada grado (es decir, los grados inferiores)
+grado_12.agregar_hijo(grado_11)
+grado_11.agregar_hijo(grado_10)
+grado_10.agregar_hijo(grado_9)
+grado_9.agregar_hijo(grado_8)
+
+# Realizando el recorrido por niveles
+recorrido_por_niveles(grado_12)
+
+# Segundo ejemplo
+print("\nEjemplo 2:")
+# Creando los nodos para otro conjunto de grados y estudiantes
+grado_6 = Nodo(6, ["Juan", "Ana", "Luis"])
+grado_5 = Nodo(5, ["Carlos", "Marta"])
+grado_4 = Nodo(4, ["José", "Sofía"])
+grado_3 = Nodo(3, ["Pedro", "Lucía"])
+grado_2 = Nodo(2, ["Pablo", "Raquel"])
+grado_1 = Nodo(1, ["Sam", "Emma"])
+
+# Organizando los grados en un árbol (de mayor a menor)
+grado_6.agregar_hijo(grado_5)
+grado_5.agregar_hijo(grado_4)
+grado_4.agregar_hijo(grado_3)
+grado_3.agregar_hijo(grado_2)
+grado_2.agregar_hijo(grado_1)
+
+# Realizando el recorrido por niveles
+recorrido_por_niveles(grado_6)
