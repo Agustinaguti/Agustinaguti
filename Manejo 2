@@ -1,0 +1,41 @@
+def buscar_libros_por_autor(autor):
+    encontrado = False  # Flag para verificar si encontramos algún libro del autor
+    
+    try:
+        # Abrir el archivo 'libros.txt' en modo lectura
+        with open("libros.txt", "r") as archivo:
+            # Leer todas las líneas del archivo
+            libros = archivo.readlines()
+        
+        # Recorrer cada línea y buscar el autor
+        for libro in libros:
+            # Separar cada línea por '|' para obtener el libro y el autor
+            libro_titulo, libro_autor = libro.strip().split(" | ")
+            
+            # Verificar si el autor de la línea es el que buscamos
+            if autor.lower() in libro_autor.lower():
+                print(f"- {libro_titulo} ({libro_autor})")
+                encontrado = True
+        
+        if not encontrado:
+            print(f"No se encontraron libros de {autor}.")
+    
+    except FileNotFoundError:
+        print("El archivo 'libros.txt' no se encuentra.")
+
+# Función para interactuar con el usuario
+def menu():
+    while True:
+        print("\n--- Menú de Búsqueda de Libros ---")
+        autor = input("Ingresa el nombre del autor que deseas buscar (o 'salir' para terminar): ").strip()
+        
+        if autor.lower() == "salir":
+            print("¡Hasta luego!")
+            break
+        
+        # Llamar a la función de búsqueda con el nombre del autor
+        buscar_libros_por_autor(autor)
+
+# Ejecutar el programa
+if __name__ == "__main__":
+    menu()
