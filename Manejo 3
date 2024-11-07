@@ -1,0 +1,55 @@
+import csv
+
+def actualizar_cantidad(libro, nueva_cantidad):
+    # Leer el archivo CSV y cargar los datos
+    try:
+        with open("inventario.csv", mode="r", newline="") as archivo:
+            reader = csv.reader(archivo)
+            # Leer todas las filas
+            inventario = list(reader)
+        
+        # Actualizar la cantidad del libro solicitado
+        libro_encontrado = False
+        for fila in inventario:
+            if fila[0].lower() == libro.lower():  # Buscar por título
+                fila[2] = str(nueva_cantidad)  # Actualizar la cantidad
+                libro_encontrado = True
+                break
+        
+        # Si no se encontró el libro
+        if not libro_encontrado:
+            print(f"No se encontró el libro '{libro}'.")
+            return
+        
+        # Escribir los cambios de vuelta al archivo CSV
+        with open("inventario.csv", mode="w", newline="") as archivo:
+            writer = csv.writer(archivo)
+            writer.writerows(inventario)
+        
+        print(f"La cantidad de copias de '{libro}' ha sido actualizada a {nueva_cantidad}.")
+    
+    except FileNotFoundError:
+        print("El archivo 'inventario.csv' no se encuentra.")
+    except Exception as e:
+        print(f"Error al procesar el archivo: {e}")
+
+def menu():
+    while True:
+        print("\n--- Menú de Actualización de Inventario de Libros ---")
+        libro = input("Ingresa el título del libro que deseas actualizar (o 'salir' para terminar): ").strip()
+        
+        if libro.lower() == 'salir':
+            print("¡Hasta luego!")
+            break
+        
+        try:
+            nueva_cantidad = int(input(f"Ingresa la nueva cantidad de copias de '{libro}': "))
+            if nueva_cantidad < 0:
+                print("La cantidad no puede ser negativa. Intenta de nuevo.")
+                continue
+        except ValueError:
+            print("Por favor, ingresa un número válido para la cantidad.")
+            continue
+        
+        # Llamar a la función para actualizar la cantidad del libro
+        actualizar_cantidad(libro, nueva_cantida
