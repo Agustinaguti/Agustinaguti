@@ -1,0 +1,53 @@
+def agregar_prestamo():
+    # Pedir los datos al usuario
+    nombre_libro = input("Ingresa el nombre del libro: ")
+    nombre_prestatario = input("Ingresa el nombre del prestatario: ")
+    fecha_prestamo = input("Ingresa la fecha del préstamo (DD/MM/YYYY): ")
+
+    # Crear una línea con los datos del préstamo
+    prestamo = f"{nombre_libro} | {nombre_prestatario} | {fecha_prestamo}\n"
+    
+    # Abrir el archivo en modo 'a' (append), lo que no sobrescribe el archivo
+    with open("prestamos.txt", "a") as archivo:
+        archivo.write(prestamo)
+    
+    print("Préstamo registrado correctamente.")
+
+def mostrar_prestamos():
+    try:
+        # Abrir el archivo en modo lectura para mostrar los préstamos
+        with open("prestamos.txt", "r") as archivo:
+            prestamos = archivo.readlines()
+        
+        if prestamos:
+            print("\nLista de préstamos registrados:")
+            for prestamo in prestamos:
+                print(prestamo.strip())
+        else:
+            print("No hay préstamos registrados.")
+    except FileNotFoundError:
+        print("El archivo 'prestamos.txt' no existe aún.")
+
+# Menú principal
+def menu():
+    while True:
+        print("\n--- Menú de Gestión de Préstamos ---")
+        print("1. Agregar préstamo")
+        print("2. Mostrar todos los préstamos")
+        print("3. Salir")
+        
+        opcion = input("Selecciona una opción: ")
+
+        if opcion == "1":
+            agregar_prestamo()
+        elif opcion == "2":
+            mostrar_prestamos()
+        elif opcion == "3":
+            print("¡Hasta luego!")
+            break
+        else:
+            print("Opción no válida. Por favor, selecciona una opción del menú.")
+
+# Ejecutar el programa
+if __name__ == "__main__":
+    menu()
