@@ -1,0 +1,67 @@
+def mostrar_registros():
+    try:
+        # Leer el archivo de préstamos
+        with open("prestamos.txt", "r") as archivo:
+            prestamos = archivo.readlines()
+        
+        # Verificar si hay préstamos en el archivo
+        if not prestamos:
+            print("No hay registros de préstamos en el archivo.")
+            return []
+        
+        # Mostrar los registros de préstamos numerados
+        print("\n--- Registros de Préstamos ---")
+        for i, registro in enumerate(prestamos, start=1):
+            print(f"{i}. {registro.strip()}")
+        
+        return prestamos
+    
+    except FileNotFoundError:
+        print("El archivo 'prestamos.txt' no se encuentra.")
+        return []
+
+def eliminar_registro(prestamos):
+    if not prestamos:
+        return
+    
+    try:
+        # Solicitar al usuario el número del registro a eliminar
+        opcion = int(input("\nIngresa el número del préstamo que deseas eliminar (0 para cancelar): "))
+        
+        if opcion == 0:
+            print("Operación cancelada.")
+            return
+        
+        # Validar si la opción está dentro del rango
+        if 1 <= opcion <= len(prestamos):
+            # Eliminar el registro seleccionado
+            registro_a_eliminar = prestamos.pop(opcion - 1)
+            print(f"\nRegistro eliminado: {registro_a_eliminar.strip()}")
+            
+            # Reescribir el archivo sin el registro eliminado
+            with open("prestamos.txt", "w") as archivo:
+                archivo.writelines(prestamos)
+            print("El archivo ha sido actualizado.")
+        else:
+            print("Opción no válida.")
+    
+    except ValueError:
+        print("Por favor, ingresa un número válido.")
+
+def menu():
+    while True:
+        # Mostrar los registros actuales
+        prestamos = mostrar_registros()
+        
+        if prestamos:
+            eliminar_registro(prestamos)
+        
+        # Preguntar al usuario si desea continuar
+        continuar = input("\n¿Deseas eliminar otro préstamo? (s/n): ").strip().lower()
+        if continuar != 's':
+            print("¡Hasta luego!")
+            break
+
+# Ejecutar el programa
+if __name__ == "__main__":
+    menu()
